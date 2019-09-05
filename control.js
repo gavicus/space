@@ -28,16 +28,17 @@ class Control {
     const distBase = 1;
     const distMult = 0.15;
     let lastDist = 0;
+    let gap = 1;
     for(let p of planets){
-      if(p.distance > 0){
-        lastDist = lastDist + 1 + p.distance * distMult;
-      }
       let pSize = 0.2 + p.size * 0.01;
       objects.push({
         size: pSize, type: p.type || 'world',
         color: p.color, distance: lastDist,
         theta: Math.random() * 2 * Math.PI,
       });
+      if(lastDist === 0){ lastDist += gap; }
+      lastDist += gap;
+      gap += 0.2;
     }
     this.systemMap = new SystemMap({ objects: objects });
   }

@@ -105,6 +105,7 @@ class View {
           innerRad, outerRad, thetaSegs, phiSegs
         );
         const ringMat = new THREE.MeshBasicMaterial({color: 0x555555});
+        ringMat.side = THREE.DoubleSide;
         const ring = new THREE.Mesh(ringGeom, ringMat);
         this.scene.add(ring);
       }
@@ -112,6 +113,7 @@ class View {
 
     const selGeom = new THREE.RingGeometry(0.1, 1, 20, 1);
     const selMat = new THREE.MeshBasicMaterial({color: 0x00ffff});
+    selMat.side = THREE.DoubleSide;
     this.hoverRing = new THREE.Mesh(selGeom, selMat);
     this.hoverRing.visible = false;
     this.scene.add(this.hoverRing);
@@ -151,7 +153,7 @@ class View {
   }
 
   setupStars() {
-    const count = 500;
+    const count = 300;
     const dist = 20;
     for(let i=0; i<count; ++i){
       let size = 0.03 + Math.random() * 0.1;
